@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build Outputs
+dist/
+build/
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# IDE Configs
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# OS specific
+Desktop.ini
+
+# Logs
+logs/
+*.log

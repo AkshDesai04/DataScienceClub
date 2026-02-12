@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team - Data Science Club @ CHARUSAT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#0f172a',
+                        foreground: '#f8fafc',
+                        card: '#1e293b',
+                        primary: '#f97316',
+                        secondary: '#eab308',
+                        accent: '#334155',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .team-card-hover:hover .social-links {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .social-links {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        /* Slider Styles */
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+        .slider-track {
+            display: flex;
+            gap: 24px;
+            transition: transform 0.5s ease-out;
+            width: max-content;
+        }
+        .slider-card {
+            flex-shrink: 0;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            color: #0f172a;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .slider-btn:hover {
+            background: #f97316;
+            color: white;
+            border-color: #f97316;
+        }
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
+    </style>
+</head>
+<body class="bg-background text-foreground antialiased font-sans">
+    
+    <!-- Navbar (Inlined) -->
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 md:h-20">
+                <div class="flex items-center space-x-2 fade-in-section">
+                    <img src="assets/images/logo.png" alt="Data Science Club Logo" class="w-10 h-10 object-contain hover:scale-110 transition-transform duration-300">
+                    <div class="hidden sm:block">
+                        <div class="text-white font-bold text-lg tracking-tight hover:text-primary transition-colors cursor-default">Data Science Club</div>
+                        <div class="text-xs text-slate-400">@ CHARUSAT</div>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-1 fade-in-section delay-100">
+                    <a href="index.html" class="nav-link px-4 py-2 rounded-lg text-slate-300 hover:text-white transition-all duration-300 relative group">Home<span class="absolute bottom-1 left-1/2 w-0 h-0.5 bg-primary group-hover:w-1/2 group-hover:-translate-x-1/2 transition-all duration-300"></span></a>
+                    <a href="about.html" class="nav-link px-4 py-2 rounded-lg text-slate-300 hover:text-white transition-all duration-300 relative group">About<span class="absolute bottom-1 left-1/2 w-0 h-0.5 bg-primary group-hover:w-1/2 group-hover:-translate-x-1/2 transition-all duration-300"></span></a>
+                    <a href="courses.html" class="nav-link px-4 py-2 rounded-lg text-slate-300 hover:text-white transition-all duration-300 relative group">Courses<span class="absolute bottom-1 left-1/2 w-0 h-0.5 bg-primary group-hover:w-1/2 group-hover:-translate-x-1/2 transition-all duration-300"></span></a>
+                    <a href="events.html" class="nav-link px-4 py-2 rounded-lg text-slate-300 hover:text-white transition-all duration-300 relative group">Events<span class="absolute bottom-1 left-1/2 w-0 h-0.5 bg-primary group-hover:w-1/2 group-hover:-translate-x-1/2 transition-all duration-300"></span></a>
+                    <a href="team.html" class="nav-link px-4 py-2 rounded-lg text-slate-300 hover:text-white transition-all duration-300 relative group">Team<span class="absolute bottom-1 left-1/2 w-0 h-0.5 bg-primary group-hover:w-1/2 group-hover:-translate-x-1/2 transition-all duration-300"></span></a>
+                    <a href="community.html" class="nav-link px-4 py-2 rounded-lg text-slate-300 hover:text-white transition-all duration-300 relative group">Community<span class="absolute bottom-1 left-1/2 w-0 h-0.5 bg-primary group-hover:w-1/2 group-hover:-translate-x-1/2 transition-all duration-300"></span></a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-white hover:bg-white/10">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 backdrop-blur-xl border-t border-white/10 absolute left-0 right-0 shadow-2xl">
+                <div class="py-4 space-y-2 px-4">
+                    <a href="index.html" class="mobile-nav-link block px-4 py-3 text-slate-300 hover:bg-primary/10 hover:text-primary rounded-xl transition-colors">Home</a>
+                    <a href="about.html" class="mobile-nav-link block px-4 py-3 text-slate-300 hover:bg-primary/10 hover:text-primary rounded-xl transition-colors">About</a>
+                    <a href="courses.html" class="mobile-nav-link block px-4 py-3 text-slate-300 hover:bg-primary/10 hover:text-primary rounded-xl transition-colors">Courses</a>
+                    <a href="events.html" class="mobile-nav-link block px-4 py-3 text-slate-300 hover:bg-primary/10 hover:text-primary rounded-xl transition-colors">Events</a>
+                    <a href="team.html" class="mobile-nav-link block px-4 py-3 text-slate-300 hover:bg-primary/10 hover:text-primary rounded-xl transition-colors">Team</a>
+                    <a href="community.html" class="mobile-nav-link block px-4 py-3 text-slate-300 hover:bg-primary/10 hover:text-primary rounded-xl transition-colors">Community</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Hero -->
+    <section class="pt-32 pb-16 bg-slate-900 relative overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[100px]"></div>
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-section">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">Meet The Team</h1>
+            <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+                The brilliant minds and dedicated individuals driving the Data Science Club forward.
+            </p>
+        </div>
+    </section>
+
+    <!-- Faculty Mentors -->
+    <section class="py-16 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in-section">
+                <span class="text-primary font-semibold tracking-wider text-sm uppercase">Guidance & Support</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">Faculty Mentors</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 justify-center">
+                <!-- Mentor 1 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:-translate-y-2 transition-all duration-300 fade-in-section delay-100 group text-center shadow-sm hover:shadow-md">
+                    <div class="w-24 h-24 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto shadow-lg group-hover:scale-110 transition-transform">PP</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-1">Prof. Purvi Prajapati</h3>
+                    <p class="text-primary text-sm font-medium mb-2">Head Of Department</p>
+                    <p class="text-slate-600 text-sm">KDPIT, CHARUSAT</p>
+                </div>
+                <!-- Mentor 2 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:-translate-y-2 transition-all duration-300 fade-in-section delay-200 group text-center shadow-sm hover:shadow-md">
+                    <div class="w-24 h-24 bg-gradient-to-br from-secondary to-primary rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto shadow-lg group-hover:scale-110 transition-transform">JV</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-1">Prof. Jalpesh Vasa</h3>
+                    <p class="text-primary text-sm font-medium mb-2">Assistant Professor</p>
+                    <p class="text-slate-600 text-sm">Dept of AIML, CSPIT</p>
+                </div>
+                <!-- Mentor 3 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:-translate-y-2 transition-all duration-300 fade-in-section delay-300 group text-center shadow-sm hover:shadow-md">
+                    <div class="w-24 h-24 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto shadow-lg group-hover:scale-110 transition-transform">HY</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-1">Prof. Hemant Yadav</h3>
+                    <p class="text-primary text-sm font-medium mb-2">Assistant Professor</p>
+                    <p class="text-slate-600 text-sm">KDPIT, CHARUSAT</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Team (Light Background) -->
+    <section class="py-24 bg-slate-50 text-slate-900 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-section">
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Our Creative <span class="text-primary">TEAM</span></h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">Connect with the entire team of Data Science Club @ Charusat</p>
+            </div>
+
+            <!-- Team Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Member Card 1 -->
+                <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 group fade-in-section delay-100 shadow-lg hover:shadow-xl">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Team Member" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent"></div>
+                    </div>
+                    <div class="p-6 text-center relative z-10 -mt-10">
+                        <div class="bg-white rounded-xl p-4 shadow-lg border border-slate-100">
+                             <h3 class="text-xl font-bold text-primary mb-1">Raj Patel</h3>
+                             <p class="text-slate-600 font-medium text-sm tracking-wide mb-4">President</p>
+                             <div class="flex justify-center space-x-3">
+                                <a href="#" class="p-2 bg-slate-100 rounded-lg text-slate-600 hover:bg-primary hover:text-white transition-colors"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                                <a href="#" class="p-2 bg-slate-100 rounded-lg text-slate-600 hover:bg-primary hover:text-white transition-colors"><i data-lucide="github" class="w-4 h-4"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member Card 2 -->
+                <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 group fade-in-section delay-200 shadow-lg hover:shadow-xl">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Team Member" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent"></div>
+                    </div>
+                    <div class="p-6 text-center relative z-10 -mt-10">
+                        <div class="bg-white rounded-xl p-4 shadow-lg border border-slate-100">
+                             <h3 class="text-xl font-bold text-primary mb-1">Priya Shah</h3>
+                             <p class="text-slate-600 font-medium text-sm tracking-wide mb-4">Vice President</p>
+                             <div class="flex justify-center space-x-3">
+                                <a href="#" class="p-2 bg-slate-100 rounded-lg text-slate-600 hover:bg-primary hover:text-white transition-colors"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                                <a href="#" class="p-2 bg-slate-100 rounded-lg text-slate-600 hover:bg-primary hover:text-white transition-colors"><i data-lucide="github" class="w-4 h-4"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member Card 3 -->
+                <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 group fade-in-section delay-300 shadow-lg hover:shadow-xl">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Team Member" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent"></div>
+                    </div>
+                    <div class="p-6 text-center relative z-10 -mt-10">
+                         <div class="bg-white rounded-xl p-4 shadow-lg border border-slate-100">
+                             <h3 class="text-xl font-bold text-primary mb-1">Arjun Mehta</h3>
+                             <p class="text-slate-600 font-medium text-sm tracking-wide mb-4">Technical Lead</p>
+                             <div class="flex justify-center space-x-3">
+                                <a href="#" class="p-2 bg-slate-100 rounded-lg text-slate-600 hover:bg-primary hover:text-white transition-colors"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                                <a href="#" class="p-2 bg-slate-100 rounded-lg text-slate-600 hover:bg-primary hover:text-white transition-colors"><i data-lucide="github" class="w-4 h-4"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member Card 4 -->
+                 <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 group fade-in-section delay-400 shadow-lg hover:shadow-xl">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Team Member" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent"></div>
+                    </div>
+                    <div class="p-6 text-center relative z-10 -mt-10">
+                        <div class="bg-white rounded-xl p-4 shadow-lg border border-slate-100">
+                             <h3 class="text-xl font-bold text-primary mb-1">Sneha Desai</h3>
+                             <p class="text-slate-600 font-medium text-sm tracking-wide mb-4">Events Coordinator</p>
+                             <div class="flex justify-center space-x-3">
+                                <a href="#" class="p-2 bg-slate-100 rounded-lg text-slate-600 hover:bg-primary hover:text-white transition-colors"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                                <a href="#" class="p-2 bg-slate-100 rounded-lg text-slate-600 hover:bg-primary hover:text-white transition-colors"><i data-lucide="github" class="w-4 h-4"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Previous Team Members (Slider) -->
+    <section class="py-24 bg-white text-slate-900 border-b border-slate-200 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12 fade-in-section">
+                <div>
+                     <span class="text-secondary font-bold tracking-wider text-sm uppercase">Legacy & History</span>
+                     <h2 class="text-3xl md:text-4xl font-bold mt-2 text-slate-900">Previous Team Members</h2>
+                </div>
+                <div class="flex gap-2">
+                    <button id="btn-2024" class="year-tab-btn px-4 py-1 bg-primary text-white rounded-full text-sm font-medium cursor-pointer transition-colors">2024</button>
+                    <button id="btn-2023" class="year-tab-btn px-4 py-1 bg-slate-200 text-slate-600 hover:bg-slate-300 rounded-full text-sm font-medium cursor-pointer transition-colors">2023</button>
+                </div>
+            </div>
+
+            <!-- Slider 2024 (Visible by default) -->
+            <div class="slider-container fade-in-section" id="slider-2024">
+                <button class="slider-btn prev-btn"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+                <div class="slider-track">
+                    <!-- Card 1 -->
+                    <div class="slider-card w-[280px] bg-slate-50 border border-slate-200 rounded-xl p-6 text-center hover:bg-white hover:shadow-md transition-all group">
+                        <div class="w-20 h-20 bg-slate-200 rounded-full mx-auto mb-4 flex items-center justify-center text-slate-500 font-bold group-hover:text-primary transition-colors text-xl">AS</div>
+                        <h4 class="font-bold text-slate-900 text-lg mb-1">Amit Shah</h4>
+                        <p class="text-primary text-sm">President (2024)</p>
+                    </div>
+                     <!-- Card 2 -->
+                    <div class="slider-card w-[280px] bg-slate-50 border border-slate-200 rounded-xl p-6 text-center hover:bg-white hover:shadow-md transition-all group">
+                        <div class="w-20 h-20 bg-slate-200 rounded-full mx-auto mb-4 flex items-center justify-center text-slate-500 font-bold group-hover:text-primary transition-colors text-xl">NP</div>
+                        <h4 class="font-bold text-slate-900 text-lg mb-1">Neha Patel</h4>
+                        <p class="text-secondary text-sm">Vice President (2024)</p>
+                    </div>
+                     <!-- Card 3 -->
+                    <div class="slider-card w-[280px] bg-slate-50 border border-slate-200 rounded-xl p-6 text-center hover:bg-white hover:shadow-md transition-all group">
+                        <div class="w-20 h-20 bg-slate-200 rounded-full mx-auto mb-4 flex items-center justify-center text-slate-500 font-bold group-hover:text-primary transition-colors text-xl">RJ</div>
+                        <h4 class="font-bold text-slate-900 text-lg mb-1">Rohan Joshi</h4>
+                        <p class="text-secondary text-sm">Tech Lead (2024)</p>
+                    </div>
+                     <!-- Card 4 -->
+                    <div class="slider-card w-[280px] bg-slate-50 border border-slate-200 rounded-xl p-6 text-center hover:bg-white hover:shadow-md transition-all group">
+                        <div class="w-20 h-20 bg-slate-200 rounded-full mx-auto mb-4 flex items-center justify-center text-slate-500 font-bold group-hover:text-primary transition-colors text-xl">SK</div>
+                        <h4 class="font-bold text-slate-900 text-lg mb-1">Sneha Kumar</h4>
+                        <p class="text-slate-500 text-sm">Treasurer (2024)</p>
+                    </div>
+                     <!-- Card 5 -->
+                    <div class="slider-card w-[280px] bg-slate-50 border border-slate-200 rounded-xl p-6 text-center hover:bg-white hover:shadow-md transition-all group">
+                        <div class="w-20 h-20 bg-slate-200 rounded-full mx-auto mb-4 flex items-center justify-center text-slate-500 font-bold group-hover:text-primary transition-colors text-xl">VR</div>
+                        <h4 class="font-bold text-slate-900 text-lg mb-1">Vikram Rao</h4>
+                        <p class="text-accent text-sm">Events Head (2024)</p>
+                    </div>
+                </div>
+                <button class="slider-btn next-btn"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+            </div>
+
+            <!-- Slider 2023 (Hidden by default) -->
+            <div class="slider-container hidden" id="slider-2023">
+                <button class="slider-btn prev-btn"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+                <div class="slider-track">
+                    <!-- Card 1 -->
+                    <div class="slider-card w-[280px] bg-slate-50 border border-slate-200 rounded-xl p-6 text-center hover:bg-white hover:shadow-md transition-all group">
+                        <div class="w-20 h-20 bg-slate-200 rounded-full mx-auto mb-4 flex items-center justify-center text-slate-500 font-bold group-hover:text-primary transition-colors text-xl">RV</div>
+                        <h4 class="font-bold text-slate-900 text-lg mb-1">Rahul Verma</h4>
+                        <p class="text-primary text-sm">President (2023)</p>
+                    </div>
+                     <!-- Card 2 -->
+                    <div class="slider-card w-[280px] bg-slate-50 border border-slate-200 rounded-xl p-6 text-center hover:bg-white hover:shadow-md transition-all group">
+                        <div class="w-20 h-20 bg-slate-200 rounded-full mx-auto mb-4 flex items-center justify-center text-slate-500 font-bold group-hover:text-primary transition-colors text-xl">AL</div>
+                        <h4 class="font-bold text-slate-900 text-lg mb-1">Anita Lim</h4>
+                        <p class="text-secondary text-sm">Vice President (2023)</p>
+                    </div>
+                     <!-- Card 3 -->
+                    <div class="slider-card w-[280px] bg-slate-50 border border-slate-200 rounded-xl p-6 text-center hover:bg-white hover:shadow-md transition-all group">
+                        <div class="w-20 h-20 bg-slate-200 rounded-full mx-auto mb-4 flex items-center justify-center text-slate-500 font-bold group-hover:text-primary transition-colors text-xl">DK</div>
+                        <h4 class="font-bold text-slate-900 text-lg mb-1">Dev Kumar</h4>
+                        <p class="text-secondary text-sm">Tech Lead (2023)</p>
+                    </div>
+                     <!-- Card 4 -->
+                    <div class="slider-card w-[280px] bg-slate-50 border border-slate-200 rounded-xl p-6 text-center hover:bg-white hover:shadow-md transition-all group">
+                        <div class="w-20 h-20 bg-slate-200 rounded-full mx-auto mb-4 flex items-center justify-center text-slate-500 font-bold group-hover:text-primary transition-colors text-xl">PS</div>
+                        <h4 class="font-bold text-slate-900 text-lg mb-1">Pooja Singh</h4>
+                        <p class="text-slate-500 text-sm">Events Head (2023)</p>
+                    </div>
+                </div>
+                <button class="slider-btn next-btn"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alumni Success Stories (Slider) -->
+    <section class="py-24 bg-slate-50 text-slate-900 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-section">
+                <span class="text-primary font-bold tracking-wider text-sm uppercase">Hall of Fame</span>
+                <h2 class="text-4xl font-bold mt-2 text-slate-900">Success Stories from Our Alumni Network</h2>
+                <div class="w-20 h-1.5 bg-primary mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="slider-container" id="alumni-slider">
+                <button class="slider-btn prev-btn"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+                <div class="slider-track">
+                    <!-- Alumni 1 -->
+                    <div class="slider-card w-[320px] bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full mb-6 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/20">AV</div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-1">Amit Verma</h4>
+                        <p class="text-primary font-medium mb-4">Data Scientist @ Google</p>
+                        <p class="text-slate-600 text-sm italic leading-relaxed">"The Data Science Club gave me the foundation I needed in ML and Python. The hackathons were a game changer for my career."</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 w-full text-xs text-slate-500">Class of 2023</div>
+                    </div>
+
+                    <!-- Alumni 2 -->
+                    <div class="slider-card w-[320px] bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mb-6 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-purple-500/20">RG</div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-1">Riya Gandhi</h4>
+                        <p class="text-primary font-medium mb-4">ML Engineer @ Microsoft</p>
+                        <p class="text-slate-600 text-sm italic leading-relaxed">"Collaborating on real-world projects with peers helped me build a strong portfolio that impressed recruiters."</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 w-full text-xs text-slate-500">Class of 2023</div>
+                    </div>
+
+                    <!-- Alumni 3 -->
+                    <div class="slider-card w-[320px] bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-orange-400 to-yellow-400 rounded-full mb-6 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-orange-500/20">VP</div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-1">Vikas Patel</h4>
+                        <p class="text-primary font-medium mb-4">Data Analyst @ Amazon</p>
+                        <p class="text-slate-600 text-sm italic leading-relaxed">"Learning SQL and Tableau through club workshops was crucial. The mentorship here is top-notch."</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 w-full text-xs text-slate-500">Class of 2022</div>
+                    </div>
+
+                    <!-- Alumni 4 -->
+                    <div class="slider-card w-[320px] bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-full mb-6 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-indigo-500/20">KS</div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-1">Kavita Singh</h4>
+                        <p class="text-primary font-medium mb-4">AI Researcher @ Meta</p>
+                        <p class="text-slate-600 text-sm italic leading-relaxed">"The research-focused sessions helped me publish my first paper. Forever grateful to this community."</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 w-full text-xs text-slate-500">Class of 2022</div>
+                    </div>
+                </div>
+                <button class="slider-btn next-btn"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Inlined) -->
+    <footer class="bg-slate-950 text-white pt-16 pb-8 border-t border-white/10 relative overflow-hidden">
+        <div class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
+             <div class="absolute -bottom-1/4 -left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[100px]"></div>
+             <div class="absolute -bottom-1/4 -right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[100px]"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <img src="assets/images/logo.png" alt="Data Science Club Logo" class="w-10 h-10 object-contain">
+                        <div>
+                            <div class="font-bold text-xl tracking-tight">Data Science Club</div>
+                            <div class="text-xs text-slate-400">@ CHARUSAT</div>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 mb-6 max-w-md">Join with us to learn and explore the vast field of data science and opportunities. Cultivating an environment that supports continuous learning, networking, and knowledge sharing.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all"><i data-lucide="github" class="w-5 h-5"></i></a>
+                        <a href="https://linkedin.com" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                        <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                         <a href="mailto:dasciclub@charusat.ac.in" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all"><i data-lucide="mail" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-6 text-white">Get in Touch</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3 text-slate-400"><i data-lucide="map-pin" class="w-5 h-5 mt-1 text-primary"></i><span>Charotar University of Science and Technology (CHARUSAT), Changa - 388421, Gujarat, India</span></div>
+                         <div class="flex items-center space-x-3 text-slate-400"><i data-lucide="mail" class="w-5 h-5 text-primary"></i><a href="mailto:dasciclub@charusat.ac.in" class="hover:text-white transition-colors">dasciclub@charusat.ac.in</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 text-sm mb-4 md:mb-0">© <span id="current-year"></span> Data Science Club @ CHARUSAT. All rights reserved.</p>
+                <div class="flex space-x-6 text-sm text-slate-500"><a href="#" class="hover:text-white transition-colors">Privacy Policy</a><a href="#" class="hover:text-white transition-colors">Terms of Service</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/team-slider.js"></script>
+</body>
+</html>

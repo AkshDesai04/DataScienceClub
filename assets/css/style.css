@@ -1,0 +1,259 @@
+:root {
+    /* Theme Variables - Dark Mode */
+    --background: #0f172a;
+    /* Slate 900 - Matches user image */
+    --foreground: #f8fafc;
+    /* Slate 50 */
+    --card: #1e293b;
+    /* Slate 800 */
+    --card-foreground: #f8fafc;
+    --popover: #1e293b;
+    --popover-foreground: #f8fafc;
+
+    /* Data Science Club Custom Colors */
+    --primary: #f97316;
+    /* Orange 500 */
+    --primary-foreground: #ffffff;
+    --secondary: #eab308;
+    /* Yellow 500 */
+    --secondary-foreground: #ffffff;
+    --accent: #334155;
+    /* Slate 700 */
+    --accent-foreground: #ffffff;
+
+    --muted: #334155;
+    --muted-foreground: #94a3b8;
+    --destructive: #ef4444;
+    --destructive-foreground: #f8fafc;
+    --border: #334155;
+    --input: #334155;
+    --ring: #f97316;
+
+    --radius: 0.5rem;
+}
+
+/* Base Styles */
+html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--foreground);
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--muted);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--muted-foreground);
+}
+
+/* utility classes for Tailwind integration */
+.bg-primary {
+    background-color: var(--primary);
+}
+
+.bg-primary\/5 {
+    background-color: rgba(249, 115, 22, 0.05);
+    /* Orange 500 */
+}
+
+.bg-primary\/10 {
+    background-color: rgba(249, 115, 22, 0.1);
+}
+
+.bg-primary\/20 {
+    background-color: rgba(249, 115, 22, 0.2);
+}
+
+.bg-primary\/90 {
+    background-color: rgba(249, 115, 22, 0.9);
+}
+
+.text-primary {
+    color: var(--primary);
+}
+
+.border-primary {
+    border-color: var(--primary);
+}
+
+.bg-secondary {
+    background-color: var(--secondary);
+}
+
+.bg-secondary\/10 {
+    background-color: rgba(234, 179, 8, 0.1);
+    /* Yellow 500 */
+}
+
+.bg-secondary\/20 {
+    background-color: rgba(234, 179, 8, 0.2);
+}
+
+.bg-secondary\/30 {
+    background-color: rgba(234, 179, 8, 0.3);
+}
+
+.bg-secondary\/90 {
+    background-color: rgba(234, 179, 8, 0.9);
+}
+
+.text-secondary {
+    color: var(--secondary);
+}
+
+.border-secondary {
+    border-color: var(--secondary);
+}
+
+.bg-accent {
+    background-color: var(--accent);
+}
+
+.text-accent {
+    color: var(--accent);
+}
+
+/* Animation Utilities */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, visibility;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered delays */
+.delay-100 {
+    animation-delay: 100ms;
+}
+
+.delay-200 {
+    animation-delay: 200ms;
+}
+
+.delay-300 {
+    animation-delay: 300ms;
+}
+
+.delay-400 {
+    animation-delay: 400ms;
+}
+
+.delay-500 {
+    animation-delay: 500ms;
+}
+
+/* Custom Animations */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+}
+
+/* Navbar Scroll State */
+.navbar-scrolled {
+    background-color: rgba(2, 6, 23, 0.8) !important;
+    /* Dark slate 950 with opacity */
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    display: none;
+    overflow: hidden;
+    transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.mobile-menu.open {
+    display: block;
+}
+
+/* Blob Animation */
+@keyframes blob {
+    0% {
+        transform: translate(0px, 0px) scale(1);
+    }
+
+    33% {
+        transform: translate(30px, -50px) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+
+    100% {
+        transform: translate(0px, 0px) scale(1);
+    }
+}
+
+.animate-blob {
+    animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+    animation-delay: 4s;
+}
+
+/* Gradient Text */
+.text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, var(--primary), var(--secondary));
+}
