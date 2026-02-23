@@ -6,6 +6,25 @@
     <title>Events - Data Science Club @ CHARUSAT</title>
     <meta name="description" content="Join our exciting data science events, workshops, and meetups at CHARUSAT.">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#0f172a',
+                        foreground: '#f8fafc',
+                        card: '#1e293b',
+                        primary: '#f97316',
+                        secondary: '#eab308',
+                        accent: '#334155',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,13 +36,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16 md:h-20">
                 <!-- Logo -->
-                <div class="flex items-center space-x-2 fade-in-section">
+                <a href="index.html" class="flex items-center space-x-2 fade-in-section no-underline">
                     <img src="assets/images/logo.png" alt="Data Science Club Logo" class="w-10 h-10 object-contain hover:scale-110 transition-transform duration-300">
                     <div class="hidden sm:block">
-                        <div class="text-white font-bold text-lg tracking-tight hover:text-primary transition-colors cursor-default">Data Science Club</div>
+                        <div class="text-white font-bold text-lg tracking-tight hover:text-primary transition-colors">Data Science Club</div>
                         <div class="text-xs text-slate-400">@ CHARUSAT</div>
                     </div>
-                </div>
+                </a>
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-1 fade-in-section delay-100">
                     <a href="index.html" class="nav-link px-4 py-2 rounded-lg text-slate-300 hover:text-white transition-all duration-300 relative group">Home<span class="absolute bottom-1 left-1/2 w-0 h-0.5 bg-primary group-hover:w-1/2 group-hover:-translate-x-1/2 transition-all duration-300"></span></a>
@@ -433,26 +452,5 @@
 
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenuBtn && mobileMenu) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
-            const yearSpan = document.getElementById('current-year');
-            if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
-                if (link.getAttribute('href') === currentPath) link.classList.add('text-white', 'bg-primary/10');
-            });
-            const navbar = document.querySelector('nav');
-            navbar.classList.remove('bg-transparent');
-            navbar.classList.add('bg-slate-900/90', 'backdrop-blur-md', 'border-b', 'border-white/10');
-            if (window.lucide) window.lucide.createIcons();
-        });
-    </script>
 </body>
 </html>

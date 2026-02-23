@@ -57,13 +57,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16 md:h-20">
                 <!-- Logo -->
-                <div class="flex items-center space-x-2 fade-in-section">
+                <a href="index.html" class="flex items-center space-x-2 fade-in-section no-underline">
                     <img src="assets/images/logo.png" alt="Data Science Club Logo" class="w-10 h-10 object-contain hover:scale-110 transition-transform duration-300">
                     <div class="hidden sm:block">
-                        <div class="text-white font-bold text-lg tracking-tight hover:text-primary transition-colors cursor-default">Data Science Club</div>
+                        <div class="text-white font-bold text-lg tracking-tight hover:text-primary transition-colors">Data Science Club</div>
                         <div class="text-xs text-slate-400">@ CHARUSAT</div>
                     </div>
-                </div>
+                </a>
 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-1 fade-in-section delay-100">
@@ -348,53 +348,5 @@
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/constellation.js"></script>
-    <script>
-        // Initialize mobile menu
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenuBtn && mobileMenu) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
-
-            // Update footer year
-            const yearSpan = document.getElementById('current-year');
-            if (yearSpan) {
-                yearSpan.textContent = new Date().getFullYear();
-            }
-
-            // Highlight active nav link
-            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
-                if (link.getAttribute('href') === currentPath) {
-                    link.classList.add('text-white', 'bg-primary/10');
-                }
-            });
-
-            // Navbar scroll effect (home page only)
-            const navbar = document.querySelector('nav');
-            if (currentPath === 'index.html' || currentPath === '') {
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 20) {
-                        navbar.classList.add('bg-slate-900/95', 'backdrop-blur-xl', 'shadow-2xl');
-                        navbar.classList.remove('bg-transparent');
-                    } else {
-                        navbar.classList.remove('bg-slate-900/95', 'backdrop-blur-xl', 'shadow-2xl');
-                        navbar.classList.add('bg-transparent');
-                    }
-                });
-            } else {
-                navbar.classList.remove('bg-transparent');
-                navbar.classList.add('bg-slate-900/90', 'backdrop-blur-md', 'border-b', 'border-white/10');
-            }
-
-            // Initialize lucide icons
-            if (window.lucide) {
-                window.lucide.createIcons();
-            }
-        });
-    </script>
 </body>
 </html>
